@@ -83,4 +83,3 @@ RUN chmod +x /wait_for_it.sh
 EXPOSE 8000
 
 WORKDIR /app
-#CMD python manage.py migrate && python manage.py runserver 0.0.0.0:8000
