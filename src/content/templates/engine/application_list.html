@@ -1,0 +1,63 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+    <h4>Your applications</h4>
+    {% if application_list %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Link</th>
+                <th scope="col">Price</th>
+                <th scope="col">Start date</th>
+                <th scope="col">Quarter</th>
+                <th scope="col">Justification</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for application in application_list %}
+                <tr>
+                    <td>{{ application.pk }}</td>
+                    <td>{{ application.title }}</td>
+                    <td>{{ application.link }}</td>
+                    <td>{{ application.price|default_if_none:"—" }}</td>
+                    <td>{{ application.start_date|default_if_none:"—" }}</td>
+                    <td>{{ application.quarter }}</td>
+                    <td>
+                        {% if application.justification|length <= 30 %}
+                            {{ application.justification }}
+                        {% else %}
+                            <details>
+                                <summary>Justification is too long. Click here to expand!</summary>
+                                <p>{{ application.justification }}</p>
+                            </details>
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" href="{% url 'engine:update' application.pk %}">
+                            <i class="bi bi-pencil-square"></i> Update
+                        </a>
+                        <a class="btn btn-danger" href="{% url 'engine:delete' application.pk %}">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You don't have any applications yet, consider creating one!</p>
+    {% endif %}
+    <p>
+        <a href="{% url 'engine:create' %}">
+            <button class="btn btn-success"><i class="bi bi-plus-lg"></i> Create a new application</button>
+        </a>
+    </p>
+
+{% endblock %}
