@@ -15,6 +15,6 @@ class Application(models.Model):
     title = models.CharField(max_length=200)
     link = models.URLField()
     price = models.CharField(max_length=50, null=True, default=None)
-    start_date = models.DateField(null=True, default=None)
+    start_date = models.DateField(null=True, default=None, help_text="Format: YYYY-MM-DD")
     quarter = models.PositiveSmallIntegerField(choices=Quarter.choices)
-    justification = models.TextField()
+    justification = models.TextField(help_text="Why this course is important for you?")
