@@ -27,7 +27,7 @@ urlpatterns = [
     path("language/", ChangeLanguageView.as_view(), name="change_language"),
     path("accounts/", include("accounts.urls")),
     path("applications/", include("engine.urls")),
-    path("", RedirectView.as_view(url=reverse_lazy("engine:list"))),
+    path("", RedirectView.as_view(url=reverse_lazy("engine:list")), name="index"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
