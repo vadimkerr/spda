@@ -1,0 +1,16 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+    <h4>Delete the application</h4>
+
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete application "{{ object.title }}"?</p>
+        {{ form }}
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form>
+
+{% endblock %}

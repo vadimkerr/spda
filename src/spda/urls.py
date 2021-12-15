@@ -15,17 +15,19 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse_lazy
+from django.views.generic import RedirectView
 
-from engine.views import ChangeLanguageView, IndexPageView
+from engine.views import ChangeLanguageView
 from spda import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", IndexPageView.as_view(), name="index"),
     path("i18n/", include("django.conf.urls.i18n")),
     path("language/", ChangeLanguageView.as_view(), name="change_language"),
     path("accounts/", include("accounts.urls")),
+    path("applications/", include("engine.urls")),
+    path("", RedirectView.as_view(url=reverse_lazy("engine:list"))),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
