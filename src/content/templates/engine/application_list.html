@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ application.pk }}</td>
                     <td>{{ application.title }}</td>
-                    <td>{{ application.link }}</td>
+                    <td><a href={{ application.link }}>{{ application.link }}</a></td>
                     <td>{{ application.price|default_if_none:"—" }}</td>
                     <td>{{ application.start_date|default_if_none:"—" }}</td>
                     <td>{{ application.quarter }}</td>
